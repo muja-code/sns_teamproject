@@ -1,0 +1,82 @@
+@import url(media.css);
+@import url(main.css);
+.board_write {
+  border-top: 2px solid #000;
+}
+.board_write_wrap {
+  margin: 20px auto;
+  width: 1000px;
+}
+.board_write .title {
+  padding: 15px;
+}
+.board_write .title dt,
+.board_write .title dd {
+  display: inline-block;
+  vertical-align: middle;
+  font-size: 1.4rem;
+}
+#editor img {
+  max-width: 100%;
+}
+.board_write .title dl {
+  font-size: 0;
+}
+.board_write .title dt{
+  width: 100px;
+}
+.board_write .title dd{
+  width: calc(100% - 200px);
+}
+.board_write .title input {
+  width: 80%;
+  padding: 10px;
+  box-sizing: border-box;
+}
+.board_write .file_upload {
+  border-top: 1px dashed #ddd;
+  border-bottom: 1px solid #000;
+  margin-left: 10px;
+  margin-bottom: 10px;
+}
+.bt_wrap {
+  margin-top: 30px;
+  font-size: 0;
+  text-align: center;
+}
+.bt_wrap a {
+  display: inline-block;
+  min-width: 80px;
+  margin-left: 10px;
+  padding: 10px;
+  border: 1px solid #000;
+  border-radius: 2px;
+  font-size: 1.4rem;
+  text-decoration: none;
+}
+.bt_wrap a:first-child{
+  margin-left: 0;
+}
+.bt_wrap a.on {
+  background:  #000;
+  color: #fff;
+}
+/* .ck-content {
+  height: 750px;
+  font-size: 1.4rem;
+} */
+
+.ck-editor__editable[role="textbox"] {
+  /* editing area */
+  min-height: 200px;
+  font-size: 1.4rem;
+}
+.ck-content .image {
+  /* block images */
+  max-width: 80%;
+  margin: 20px auto;
+}
+a {
+  text-decoration: none;
+  color: inherit;
+}

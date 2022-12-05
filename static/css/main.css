@@ -1,0 +1,10 @@
+@import url(media.css);
+@import url(nav.css);
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+html {
+  font-size: 10px;
+}

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <link rel="stylesheet" href="../static/css/view.css" />
+    <title>main</title>
+    <script>
+      function delete_board(num) {
+        console.log(num)
+        $.ajax({
+          type: "DELETE",
+          url:  `/${num}`,
+          data: {},
+          success: function (response) {
+            alert(response["msg"]);
+            window.location.href="/board/{{ list[0][11] }}"
+          },
+        });
+      }
+    </script>
+  </head>
+  <body>
+    <nav>
+      <a href="/">loge</a>
+      <a href="/write">글쓰기</a>
+    </nav>
+    <div class="board_view_wrap">
+      <div class="board_view">
+        <div class="title">{{ list[0][1] }}</div>
+        <div class="info">
+          <dl>
+            <dt>글쓴이</dt>
+            <dd>{{ list[0][9] }}</dd>
+          </dl>
+          <dl>
+            <dt>작성일</dt>
+            <dd>{{ list[0][4] }}</dd>
+          </dl>
+          <dl>
+            <dt>조회</dt>
+            <dd>{{ list[0][5] }}</dd>
+          </dl>
+        </div>
+        <div class="cont">
+          {{ list[0][2] }}
+        </div>
+      </div>
+    </div>
+    <div class="bt_wrap">
+      <a href="/edit/{{ list[0][0] }}">수정</a>
+      <a onclick="delete_board({{ list[0][0] }})" class="on">삭제</a>
+      <a href="/board/{{ list[0][11] }}">목록</a>
+    </div>
+  </body>
+</html>

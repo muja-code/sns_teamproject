@@ -1,0 +1,89 @@
+@import url(media.css);
+@import url(nav.css);
+@import url(main.css);
+.board__wrap {
+  margin: 20px auto;
+  width: 1000px;
+}
+.board_view_wrap {
+  margin: 20px auto;
+  width: 1000px;
+}
+.board_view {
+  width: 100%;
+  border-top:2px solid #000;
+  font-size: 1.4rem;
+}
+.board_view .title {
+  padding: 20px 15px;
+  border-bottom: 1px dashed #ddd;
+  font-size: 2rem;
+}
+.board_view .info {
+  padding: 15px;
+  border-bottom:  1px solid #999;
+  font-size: 0;
+}
+.board_view .info dl {
+  position: relative;
+  display: inline-block;
+  padding: 0 20px;
+}
+.board_view .info dl:first-child {
+  padding-left: 0;
+}
+.board_view .info dl::before {
+  content: "";
+  width: 1px;
+  height: 13px;
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: #ddd;
+}
+.board_view .info dl:first-child:before{
+  display: none;
+}
+.board_view .info dl dt,
+.board_view .info dl dd {
+  display: inline-block;
+  font-size: 1.4rem;
+}
+
+.board_view .info dl dd{
+  margin-left: 10px;
+  color: #777;
+}
+
+.board_view .cont {
+  padding: 15px;
+  border-bottom: 1px solid #000;
+  line-height: 200%;
+  font-size: 1.4rem;
+}
+
+.bt_wrap {
+  margin-top: 30px;
+  font-size: 0;
+  text-align: center;
+}
+.bt_wrap a {
+  display: inline-block;
+  min-width: 80px;
+  margin-left: 10px;
+  padding: 10px;
+  border: 1px solid #000;
+  border-radius: 2px;
+  font-size: 1.4rem;
+  text-decoration: none;
+}
+.bt_wrap a:first-child{
+  margin-left: 0;
+}
+.bt_wrap a.on {
+  background:  #000;
+  color: #fff;
+  cursor: pointer;
+}
+
