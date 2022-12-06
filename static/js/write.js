@@ -1,16 +1,16 @@
-// function save_cont() {
-//   let title = $("#title").val();
-//   let cont = $("#container").val();
-//   $.ajax({
-//     type: "POST",
-//     url: "/write/post",
-//     data: { title: title, cont: cont },
-//     success: function (response) {
-//       alert(response["msg"]);
-//       window.location.reload();
-//     },
-//   });
-// }
+function save_cont() {
+  let title = $("#title").val();
+  let cont = $("#container").val();
+  $.ajax({
+    type: "POST",
+    url: "/write/post",
+    data: { title: title, cont: cont },
+    success: function (response) {
+      alert(response["msg"]);
+      window.location.href="/board";
+    },
+  });
+}
 
 
 
