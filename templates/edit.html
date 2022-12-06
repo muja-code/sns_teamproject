@@ -7,266 +7,55 @@
     <!-- 반응형 -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
+    <link rel="stylesheet" href="../static/css/write.css" />
+
     <!-- jquery CDN -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-
-    <link rel="stylesheet" href="../static/css/write.css" />
+    <script src="https://cdn.ckeditor.com/ckeditor5/35.3.2/super-build/ckeditor.js"></script>
+    <script src="https://cdn.ckeditor.com/ckeditor5/35.3.2/super-build/translations/es.js"></script>
+   
     <title>글쓰기</title>
-    <script>
-      function edit_cont() {
-        let title = $("#title").val();
-        // let cont = $("").val();
-        $.ajax({
-          type: "PUT",
-          url: `/edit/{{list[0][0]}}`,
-          data: {title: title},
-          success: function(response) {
-            alert(response["msg"]);
-            window.location.reload();
-          },
-        });
-      }
-    </script>
   </head>
   <body>
-    <div class="board_write_wrap">
-      <div class="board_write">
-        <div class="title">
-          <dl>
-            <dt>제목</dt>
-            <dd><input type="text" placeholder="제목 입력" value="{{list[0][1]}}"/></dd>
-          </dl>
-        </div>
-        <div class="file_upload">
-          <input type="file" name="file_name" value="" />
-        </div>
-        <div id="container">
-          <div id="editor">{{list[0][2]}}</div>
-        </div>
-        <script src="https://cdn.ckeditor.com/ckeditor5/35.3.2/super-build/ckeditor.js"></script>
-          <script src="https://cdn.ckeditor.com/ckeditor5/35.3.2/super-build/translations/es.js"></script>
-        <script>
-          CKEDITOR.ClassicEditor.create(document.getElementById("editor"), {
-            toolbar: {
-              items: [
-                "exportPDF",
-                "exportWord",
-                "|",
-                "findAndReplace",
-                "selectAll",
-                "|",
-                "heading",
-                "|",
-                "bold",
-                "italic",
-                "strikethrough",
-                "underline",
-                "code",
-                "subscript",
-                "superscript",
-                "removeFormat",
-                "|",
-                "bulletedList",
-                "numberedList",
-                "todoList",
-                "|",
-                "outdent",
-                "indent",
-                "|",
-                "undo",
-                "redo",
-                "-",
-                "fontSize",
-                "fontFamily",
-                "fontColor",
-                "fontBackgroundColor",
-                "highlight",
-                "|",
-                "alignment",
-                "|",
-                "link",
-                "insertImage",
-                "blockQuote",
-                "insertTable",
-                "mediaEmbed",
-                "codeBlock",
-                "htmlEmbed",
-                "|",
-                "specialCharacters",
-                "horizontalLine",
-                "pageBreak",
-                "|",
-                "sourceEditing",
-              ],
-              shouldNotGroupWhenFull: true,
-            },
-            language: "ko",
-            list: {
-              properties: {
-                styles: true,
-                startIndex: true,
-                reversed: true,
-              },
-            },
-            heading: {
-              options: [
-                {
-                  model: "paragraph",
-                  title: "문단",
-                  class: "ck-heading_paragraph",
-                },
-                {
-                  model: "Heading 1",
-                  view: "h1",
-                  title: "제목 1",
-                  class: "ck-heading_heading1",
-                },
-                {
-                  model: "heading 2",
-                  view: "h2",
-                  title: "제목 2",
-                  class: "ck-heading_heading2",
-                },
-                {
-                  model: "heading 3",
-                  view: "h3",
-                  title: "제목 3",
-                  class: "ck-heading_heading3",
-                },
-                {
-                  model: "heading 4",
-                  view: "h4",
-                  title: "제목 4",
-                  class: "ck-heading_heading4",
-                },
-                {
-                  model: "heading 5",
-                  view: "h5",
-                  title: "제목 5",
-                  class: "ck-heading_heading5",
-                },
-                {
-                  model: "heading 6",
-                  view: "h6",
-                  title: "제목 6",
-                  class: "ck-heading_heading6",
-                },
-              ],
-            },
-            placeholder: "여기에 내용을 입력하거나 붙여넣으세요.",
-            fontFamily: {
-              options: [
-                "default",
-                "Arial, Helvetica, sans-serif",
-                "Courier New, Courier, monospace",
-                "Georgia, serif",
-                "Lucida Sans Unicode, Lucida Grande, sans-serif",
-                "Tahoma, Geneva, sans-serif",
-                "Times New Roman, Times, serif",
-                "Trebuchet MS, Helvetica, sans-serif",
-                "Verdana, Geneva, sans-serif",
-                "궁서체",
-                "바탕",
-                "돋움",
-              ],
-              supportAllValues: true,
-            },
-            fontSize: {
-              options: [10, 12, 14, 16, 18, 20, 22],
-              supportAllValues: true,
-            },
-            htmlSupport: {
-              allow: [
-                {
-                  name: /.*/,
-                  attributes: true,
-                  classes: true,
-                  styles: true,
-                },
-              ],
-            },
-            htmlEmbed: {
-              showPreviews: true,
-            },
-            link: {
-              decorators: {
-                addTargetToExternalLinks: true,
-                defaultProtocol: "https://",
-                toggleDownloadable: {
-                  mode: "manual",
-                  label: "Downloadable",
-                  attributes: {
-                    download: "file",
-                  },
-                },
-              },
-            },
-            mention: {
-              feeds: [
-                {
-                  marker: "@",
-                  feed: [
-                    "@apple",
-                    "@bears",
-                    "@brownie",
-                    "@cake",
-                    "@cake",
-                    "@candy",
-                    "@canes",
-                    "@chocolate",
-                    "@cookie",
-                    "@cotton",
-                    "@cream",
-                    "@cupcake",
-                    "@danish",
-                    "@donut",
-                    "@dragée",
-                    "@fruitcake",
-                    "@gingerbread",
-                    "@gummi",
-                    "@ice",
-                    "@jelly-o",
-                    "@liquorice",
-                    "@macaroon",
-                    "@marzipan",
-                    "@oat",
-                    "@pie",
-                    "@plum",
-                    "@pudding",
-                    "@sesame",
-                    "@snaps",
-                    "@soufflé",
-                    "@sugar",
-                    "@sweet",
-                    "@topping",
-                    "@wafer",
-                  ],
-                  minimumCharacters: 1,
-                },
-              ],
-            },
-            removePlugins: [
-              "CKBox",
-              "CKFinder",
-              "textPartLanguage",
-              "RealTimeCollaborativeComments",
-              "RealTimeCollaborativeTrackChanges",
-              "RealTimeCollaborativeRevisionHistory",
-              "PresenceList",
-              "Comments",
-              "TrackChanges",
-              "TrackChangesData",
-              "RevisionHistory",
-              "Pagination",
-              "WProofreader",
-              "MathType",
-            ],
-          });
-        </script>
-      </div>
-      <div class="bt_wrap">
-        <a href="/board" class="on">수정</a>
-        <a href="javascript:history.back();">취소</a>
+    <div class="container">
+      <div class="board_write_wrap">
+        <form name="frm_pw" method="POST" action="/edit/{{list[0][0]}}">
+          <div class="board_write">
+            <div class="title">
+              <dl>
+                <dt>제목</dt>
+                <dd>
+                  <input
+                    type="text"
+                    name="subject"
+                    class="form-control"
+                    placeholder="제목을 입력하세요!"
+                    value="{{list[0][1]}}"
+                  />
+                </dd>
+              </dl>
+            </div>
+            <div id="container">
+              <textarea name="contents" id="editor" class="form-control"></textarea>
+            </div>
+            <script>
+              let tmpStr = "{{ list[0][2] }}";
+              tmpStr = tmpStr.replaceAll("&lt;", "<");
+              tmpStr = tmpStr.replaceAll("&gt;", ">");
+              tmpStr = tmpStr.replaceAll("&amp;lt;", "<");
+              tmpStr = tmpStr.replaceAll("&amp;gt;", ">");
+              tmpStr = tmpStr.replaceAll("&amp;nbsp;", " ");
+              tmpStr = tmpStr.replaceAll("&amp;amp;", "&");
+              tmpStr = tmpStr.replaceAll("&#34;", '"');
+              document.getElementById("editor").innerHTML = tmpStr;
+            </script>
+            <script src="../static/js/write.js"></script>
+          </div>
+          <div class="bt_wrap">
+            <button class="on"><a><input type="submit" value="수정" class="btn btn-default" /></a></button>
+            <button><a href="/board/{{ list[0][0] }}">취소</a></button>
+          </div>
+        </form>
       </div>
     </div>
   </body>

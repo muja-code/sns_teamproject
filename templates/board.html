@@ -7,19 +7,7 @@
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <link rel="stylesheet" href="../static/css/board.css" />
     <title>my page</title>
-    <script>
-      // function hit() {
-      //   $.ajax({
-      //     type: "POST",
-      //     url: "/hit/post",
-      //     data: {},
-      //     success: function(response) {
-      //       alert(response["msg"]);
-      //       window.location.reload();
-      //     },
-      //   });
-      // }
-    </script>
+    <script src="../static/js/board.js"></script>
   </head>
   <body>
     <nav>
@@ -34,7 +22,7 @@
       <div class="board_list_wrap">
         <div class="board_list">
           {% for i in data_list %}
-          <a href="/{{ i[9] }}/{{ i[0] }}" onclick="hit()">{{ i[1] }}</a>
+          <a href="/board/{{ i[0] }}" onclick="hit()">{{ i[1] }}</a>
           <div class="blank"></div>
           <div class="date">작성일 : {{ i[4] }}</div>
           <div class="view_count">조회 : {{ i[5] }}</div>
