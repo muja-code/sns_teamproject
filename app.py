@@ -11,113 +11,105 @@ bcrypt = Bcrypt(app)
 
 @app.route('/')
 def home():
+   return render_template("main.html")
+
+@app.route('/write')
+def write():
+    return render_template("write.html")
+
+@app.route('/board', methods=['GET'])
+def board():
+    db = pymysql.connect(host='localhost', user='root', db='yogurt', password='810665', charset='utf8')
+    curs = db.cursor()
+
+    sql = "SELECT * FROM  board b inner JOIN `user` u ON b.user_id = u.id"
+
+    curs.execute(sql)
+
+    data_list = curs.fetchall()
+
+    db.commit()
+    db.close()
+
+    return render_template('board.html', data_list=data_list)
+
+@app.route('/<num>', methods=['GET'])
+def view(num):
+    db = pymysql.connect(host='localhost', user='root', db='yogurt', password='810665', charset='utf8')
+    curs = db.cursor()
+
+    sql = f"SELECT * FROM  board WHERE num = '{num}'"
+
+    curs.execute(sql)
+
+    rows = curs.fetchall()
+    list = []
+    for row in rows:
+        list.append(row)
+
+    db.commit()
+    db.close()
+
+    return render_template('view.html', list=list)
+
+@app.route('/edit/<num>', methods=['GET'])
+def correction(num):
+    db = pymysql.connect(host='localhost', user='root', db='yogurt', password='810665', charset='utf8')
+    curs = db.cursor()
+
+    sql = f"SELECT * FROM board WHERE num = '{num}'"
+
+    curs.execute(sql)
+
+    rows = curs.fetchall()
+    
+    list = []
+    for row in rows:
+        list.append(row)
+
+    db.commit()
+    db.close()  
+
+    return render_template('edit.html', list=list)
+
+@app.route('/write/post', methods=['POST'])
+def write_post():
+    db = pymysql.connect(host='localhost', user='root', db='yogurt', password='810665', charset='utf8')
+    curs = db.cursor()
+
+    title = request.form["title"]
+    cont = request.form["cont"]
+    sql = f"INSERT INTO BOARD  (title, CONTENTS, NAME, `date`, user_id) VALUES(%s, %s, %s, NOW(), 1);"
+
+    curs.execute(sql,(title, cont, "테스트8"))
+
+    db.commit()
+    db.close()
+
+    return jsonify({'msg': '등록성공'})
+
+@app.route('/<num>', methods=['POST'])
+def hit(num):
+    db = pymysql.connect(host='localhost', user='root', db='yogurt', password='810665', charset='utf8')
+    curs = db.cursor()
+
+    sql = f"update board set hit = hit + 1 where num = '{num}';"
+
+    curs.execute(sql)
     return render_template("index.html")
-
-
-@app.route('/users', methods=["POST"])
-def create_users():
-    db = pymysql.connect(host='localhost', user='root', db='yogurt', password='0000', charset='utf8')
+    
+@app.route("/<num>", methods=["DELETE"])
+def delete_boadr(num):
+    db = pymysql.connect(host='localhost', user='root', db='yogurt', password='810665', charset='utf8')
     curs = db.cursor()
 
-    user = request.json
-
-    user_id = user["user_id"]
-    user_pw = user["user_pw"]
-    user_name = user["user_name"]
-    user_email = user["user_email"]
-    user_disc = user["user_disc"]
-
-    pw_hash = bcrypt.generate_password_hash(user_pw)
-
-    sql = '''INSERT INTO `user` (user_id, user_pw, user_name, user_email, user_disc) VALUES (%s, %s, %s, %s, %s)
-      '''
-    curs.execute(sql, (user_id, pw_hash, user_name, user_email, user_disc))
+    sql = f"DELETE FROM board WHERE num = '{num}'"
+    curs.execute(sql)
 
     db.commit()
     db.close()
-    return 'insert success', 200
 
-
-@app.route('/users/<id>', methods=["GET"])
-def get_users(id):
-
-    if id not in session:
-        return redirect("/login")
-
-    db = pymysql.connect(host='localhost', user='root', db='yogurt', password='0000', charset='utf8')
-    curs = db.cursor()
-
-    sql = '''SELECT user_id, user_name, user_email, user_disc FROM `user` AS u WHERE u.id=%s'''
-
-    curs.execute(sql, id)
-
-    rows = curs.fetchall()
-    print(rows)
-    db.commit()
-    db.close()
-    result = {
-        "user_id": rows[0][0],
-        "user_name": rows[0][1],
-        "user_email": rows[0][2],
-        "user_disc": rows[0][3]
-    }
-
-    return jsonify({'users': result}), 200
-
-
-@app.route('/board', methods=["POST"])
-def writing():
-
-    if id not in session:
-        return redirect("/login")
-
-    db = pymysql.connect(host='localhost', user='root', db='yogurt', password='0000', charset='utf8')
-    curs = db.cursor()
-
-    board = request.json
-
-    title = board["title"]
-    contents = board["contents"]
-    name = board["name"]
-    date = board["date"]
-    hit = board["hit"]
-    user_id = board["user_id"]
-
-    sql = '''
-         INSERT INTO board (title, contents, name, date, hit, user_id) VALUES (%s, %s, %s, %s, %s, %s)
-         '''
-    curs.execute(sql, (title, contents, name, date, hit, user_id))
-
-    db.commit()
-    db.close()
-    return 'insert success', 200
-
-
-@app.route('/board/<id>', methods=["GET"])
-def get_board(id):
-
-    if id not in session:
-        return redirect("/login")
-
-    db = pymysql.connect(host='localhost', user='root', db='yogurt', password='0000', charset='utf8')
-    curs = db.cursor()
-
-    sql = """
-      SELECT title, contents, name, hit
-      FROM board as b
-      LEFT JOIN `user` as u
-      ON b.user_id = u.id WHERE b.user_id = %s
-      """
-
-    curs.execute(sql, id)
-
-    rows = curs.fetchall()
-    db.commit()
-    db.close()
-
-    json_str = json.dumps(rows, indent=4, sort_keys=True, default=str)
-
-    return json_str, 200
+    return jsonify({'msg': '삭제 완료!'})
 
 @app.route('/login')
 def login_page():
@@ -137,10 +129,6 @@ def login():
     curs.execute(sql, user_id)
 
     rows = curs.fetchall()
-
-    db.commit()
-    db.close()
-
     is_login = bcrypt.check_password_hash(rows[0][1], user_pw)
 
     if is_login == False:
