@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <title>Title</title>
+</head>
+<body>
+<h2>회원 가입</h2>
+<hr>
+<div id="regfrom">
+    <form name="user-form">
+        <label>아이디</label>
+        <input type="text" class="id" name="id" size="40">
+        <label>비밀번호</label>
+        <input type="password" class="password" name="password" size="40">
+        <label>이름</label>
+        <input type="text" class="name" name="email" size="40">
+        <label>이메일</label>
+        <input type="email" class="email" name="email" size="40">
+        <label class="disc">자기소개</label>
+        <textarea></textarea>
+        <button class="creat-btn">회원가입</button>
+    </form>
+</div>
+<script>
+    $(".creat-btn").click(function () {
+        const id = $(".id").val();
+        const pw = $(".password").val();
+        const name = $(".name").val();
+        const email = $(".email").val();
+        const disc = $(".disc").val();
+
+        $.ajax({
+            type: "POST",
+            url: `/users`,
+            data: {
+                id: id,
+                pw: pw,
+                name:name,
+                email:email,
+                disc:disc
+            },
+            success: function (response) {
+                console.log(response["msg"]);
+                alert("회원가입 성공");
+                window.location.href = "/";
+            }
+        })
+    })
+</script>
+</body>
+</html>
