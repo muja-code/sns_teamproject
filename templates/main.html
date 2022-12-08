@@ -46,6 +46,21 @@
             display: flex;
             justify-content: space-between;
         }
+
+        .current > a {
+            font-weight: bold;
+            background-color: #e9ecef;
+        }
+
+        .pagination {
+            justify-content: center;
+        }
+
+        .card-title {
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
     </style>
 </head>
 <body>
@@ -55,17 +70,18 @@
         {% if id != None %}
         <button type="button" class="btn btn-warning"><a href='/write'>글쓰기</a></button>
         <button type="button" class="btn btn-info"><a href="/users/{{id}}">프로필</a></button>
+        <button id="logout" type="button" class="btn btn-dark">로그아웃</button>
         {% elif id == None %}
-        <button><a href="/login">로그인</a></button>
+        <button type="button" class="btn btn-primary"><a href="/login">로그인</a></button>
+        <button type="button" class="btn btn-primary"><a href="/users">회원가입</a></button>
         {% endif %}
-        <button id="logout">로그아웃</button>
     </nav>
 </header>
 <hr>
 
 <div class="container">
     <div class="row row-cols-auto">
-        {% for i in data_list %}
+        {% for i in data_lists %}
         <div class="col">
             <div class="card" style="width: 18rem;">
                 <img src="../static/img/smit200600015.png" class="card-img-top" alt="...">
@@ -86,9 +102,9 @@
         </div>
         {% endfor %}
     </div>
-
-</div>
-
+    <nav aria-label="Page navigation example">
+        {{ pagination.links | safe }}
+    </nav>
 </body>
 <script>
     $("#logout").click(function () {
@@ -104,31 +120,9 @@
         })
     })
 
-    // $(".upload").click(function () {
-    //
-    //     const imageInput = $("#imageInput")[0];
-    //     const name = $("#name").val();
-    //     console.log("imageInput: ", imageInput.files)
-    //
-    //     if (imageInput.files.length === 0) {
-    //         alert("파일은 선택해주세요");
-    //         return;
-    //     }
-    //
-    //     const formData = new FormData();
-    //     // <input type="file" name="file" value="선택한 파일">
-    //     formData.append("file", imageInput.files[0]);
-    //     formData.append("name", name)
-    //
-    //     $.ajax({
-    //         type: "POST",
-    //         url: "/upload",
-    //         processData: false,
-    //         contentType: false,
-    //         data: formData,
-    //         success: function (rtn) {
-    //         }
-    //     })
-    // })
+    $(".pagination  ").removeClass(".pagination");
+    $("body > div > nav > ul > li").addClass("page-item");
+    $("body > div > nav > ul > li > a").addClass("page-link");
+
 </script>
 </html>
