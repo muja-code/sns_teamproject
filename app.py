@@ -1,10 +1,11 @@
-from flask import Flask, render_template, request, redirect, url_for, jsonify
+from flask import Flask, render_template, request, redirect, url_for, jsonify, flash
+from flask_paginate import Pagination, get_page_args
+# from flask_sqlalchemy import pagination
 import pymysql
-
 
 app = Flask(__name__)
 
-
+ROWS_PER_PAGE = 8
 
 @app.route('/')
 def home():
@@ -16,19 +17,26 @@ def write():
 
 @app.route('/board', methods=['GET'])
 def board():
+    per_page = 8
+    page, _, offset = get_page_args(per_page=per_page)  # 포스트 10개씩 페이지네이션
+
     db = pymysql.connect(host='localhost', user='root', db='yogurt', password='810665', charset='utf8')
     curs = db.cursor()
 
-    sql = "SELECT * FROM  board b inner JOIN `user` u ON b.user_id = u.id"
+    curs.execute("SELECT COUNT(*) FROM board;")
 
-    curs.execute(sql)
+    all_count = curs.fetchall()[0][0]
 
+    curs.execute("SELECT * FROM board ORDER BY `date` DESC LIMIT %s OFFSET %s;", (per_page, offset))
     data_list = curs.fetchall()
 
     db.commit()
     db.close()
 
-    return render_template('board.html', data_list=data_list)
+    pagination = Pagination(page=page, per_page=per_page, total=all_count, record_name='board', css_framework='foundation', bs_version=5)
+
+    return render_template('board.html', data_lists=data_list, pagination=pagination)
+
 
 @app.route('/board/<num>', methods=['GET'])
 def view(num):
@@ -48,11 +56,9 @@ def view(num):
     for row in rows:
         list.append(row)
     
+    
     db.commit()
     db.close()
-
-
-
 
     return render_template('view.html', list=list)
 
@@ -80,9 +86,13 @@ def correction(num):
 def write_post():
     db = pymysql.connect(host='localhost', user='root', db='yogurt', password='810665', charset='utf8')
     curs = db.cursor()
-
+    
     title = request.form["subject"]
     cont = request.form["contents"]
+
+    # if title == "" or cont == "":
+    #     return flash
+
     sql = f"INSERT INTO BOARD  (title, CONTENTS, NAME, `date`, user_id) VALUES(%s, %s, %s, NOW(), 1);"
 
     curs.execute(sql,(title, cont, "테스트8"))
@@ -108,18 +118,6 @@ def edit(num):
     db.close()
 
     return redirect(f'/board/{num}')
-
-# @app.route('/board/<num>', methods=['POST'])
-# def hit(num):
-#     db = pymysql.connect(host='localhost', user='root', db='yogurt', password='810665', charset='utf8')
-#     curs = db.cursor()
-
-    
-
-#     db.commit()
-#     db.close()
-
-#     return jsonify({'msg': '업데이트 성공'})
 
 @app.route("/<num>", methods=["DELETE"])
 def delete_boadr(num):
