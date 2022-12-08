@@ -59,6 +59,11 @@ div {
     width: 100%
 }
 
+#disc {
+    width: 100%;
+    height: 100px;
+}
+
 .userInput4 input {
     width: 100%
 }

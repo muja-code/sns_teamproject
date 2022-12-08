@@ -63,20 +63,26 @@ def user_page():
 def login_info_post():
     db = pymysql.connect(host='localhost', user='root', password='0000', database='yogurt', charset='utf8')
     cursor = db.cursor()
-
+    print(1)
+    print(request.form)
     user_id_receive = request.form['user_id_give']
     user_pass_receive = request.form['user_pass1_give']
     name_receive = request.form['name_give']
     email_receive = request.form['email_give']
+    disc_receive = request.form['disc_give']
+    img_receive = request.form['img_give']
 
-    pw_hash = bcrypt.generate_password_hash(user_pass_receive)
+    # pw_hash = bcrypt.generate_password_hash(user_pass_receive)
 
-    sql = 'INSERT INTO user (user_id, user_pw, user_name, user_email) values(%s, %s, %s, %s)'
-    cursor.execute(sql, (user_id_receive, pw_hash, name_receive, email_receive))
+    sql = 'INSERT INTO user (user_id, user_pw, user_name, user_email, user_image, user_disc) values(%s, %s, %s, %s, %s, %s)'
+    cursor.execute(sql, (user_id_receive, user_pass_receive, name_receive, email_receive, img_receive, disc_receive))
 
     db.commit()
     db.close()
-    return 'insert success', 200
+    print(2)
+    flash("회원가입 성공!!")
+    print(3)
+    return jsonify({"msg":"성공!"})
 
 
 @app.route('/write')

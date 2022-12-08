@@ -1,6 +1,7 @@
 //회원가입 유효성검사
 // 자원을 화면에 로드하게 되면 수행할 동작(==function)
-window.onload = function () {
+$(document).ready(function () {
+
     var join = document.join; //form데이터를 모두 join변수에 저장
 
     // 유효성검사할 부분을 class로 부여했기에 check class 태그를 모두 input에 저장 가져옴
@@ -20,7 +21,6 @@ window.onload = function () {
             error[i].innerHTML = "";
         }
     }
-
     // 초기화 메서드 호출
     innerReset(error);
 
@@ -31,9 +31,9 @@ window.onload = function () {
         if (!idLimit.test(input[0].value)) { //입력값과 정규식 범위와 같지 않다면
             // id의 오류 문구삽입
             document.getElementById(errorId[0]).innerHTML = "5~20자의 영문 소대문자, 숫자만 사용 가능합니다.";
-
         }
     }
+
     // [ PW 입력문자 유효성검사 ]
     join.user_pass1.onkeydown = function () {
         innerReset(error); // 초기화 메서드 호출
@@ -43,12 +43,14 @@ window.onload = function () {
             document.getElementById(errorId[1]).innerHTML = " 10~20자의 영문 소대문자, 숫자와 특수기호만 사용 가능합니다.";
         }
     }
+
     // [ PW 재확인 입력문자 초기화 ]
     //비밀번호 동일여부는 submit 버튼 클릭시 검사해줄 예정
     join.user_pass2.onkeydown = function () {
         // pw의 오류 문구삽입
         innerReset(error);// 오류문구 초기화
     }
+
     join.name.onkeydown = function () { //입력값과 정규식 범위와 같지 않다면
         innerReset(error); // 초기화 메서드 호출
         var nameLimit = /[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]{2,4}$/; // 정규식 0~9, a~z, A~Z, -, _, .내에서만 입력가능
@@ -57,6 +59,7 @@ window.onload = function () {
             document.getElementById(errorId[3]).innerHTML = " 2~4자의 한글만 가능합니다.";
         }
     }
+
     // [ 이메일 입력 유효성검사 ]
     join.email.onkeydown = function () { //입력값과 정규식 범위와 같지 않다면
         innerReset(error); // 초기화 메서드 호출
@@ -66,8 +69,10 @@ window.onload = function () {
             document.getElementById(errorId[4]).innerHTML = " 7~15자의 영문,숫자만 가능합니다.";
         }
     }
+
+    // join.onsubmit = function () { //join에서 submit이 실행된다면 수행할 함수
 //submit 실행시 수행할 동작
-    join.onsubmit = function () { //join에서 submit이 실행된다면 수행할 함수
+    $("#btnJoin").click(function () {
         var errorStr = [" 아이디를", " 비밀번호를", " 비밀번호 확인을", " 성함을", " 이메일을"];
 
         innerReset(error); // 오류문구 초기화
@@ -115,6 +120,7 @@ window.onload = function () {
             join.name.focus(); // 포커스 이동
             return false;
         }
+
         // [ email 아이디 유효성검사 ]
         if (!emailLimit.test(input[4].value)) {
             document.getElementById(errorId[4]).innerHTML = "7~15자의 영문,숫자만 가능합니다.";
@@ -135,7 +141,9 @@ window.onload = function () {
         let user_pass2 = $('#user_pass2').val()
         let name = $('#name').val()
         let email = $('#email').val()
-
+        let disc = $("#disc").val()
+        let img = "default.png"
+        console.log(disc)
         $.ajax({
             type: "POST",
             url: "/users",
@@ -145,15 +153,16 @@ window.onload = function () {
                 'user_pass2_give': user_pass2,
                 'name_give': name,
                 'email_give': email,
+                'disc_give': disc,
+                'img_give': img
             },
             success: function (response) {
-                alert(response["msg"])
+                console.log(response["msg"])
                 window.location.href = "/login";
-
             }
         });
-    }
-}
+    })
+})
 
 
 

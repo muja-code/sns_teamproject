@@ -13,14 +13,13 @@
             crossorigin="anonymous"></script>
     <link href="{{ url_for('static', filename='css/LDH_join.css') }}" rel="stylesheet" type="text/css"/>
     <script type=text/javascript src="{{ url_for('static', filename='js/LDH_script.js') }}"></script>
-    <script src="signUpjs3.js"></script>
     <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
     <title>회원가입</title>
 </head>
 
 <body>
 <div id="wrap" class="wrapper">
-    <form method="post" name="join">
+    <form name="join">
         <!-- 회원가입 타이틀부분 -->
         <header>
             <div id="header">
@@ -73,7 +72,11 @@
                         </select>
                   </span>
                 </div>
-                <!-- 개인정보 수집 동의 -->
+                <div class="userInput4">
+                    <h3 class="list">자기소개<span id="discError"></span></h3>
+                    <span class="box int_id"><textarea id="disc"></textarea></span>
+                </div>
+                개인정보 수집 동의
                 <div class="userInput">
                     <h3 class="list">개인정보 수집/이용동의<span id="consentError"></span></h3>
                     <div class="agree">
@@ -98,13 +101,13 @@
                     <label class="select"><input type="radio" id="check" name="check" value="동의">동의</label>
                     <label class="select"><input type="radio" id="noneCheck" name="check" value="비동의" checked="checked">비동의</label>
                 </div>
-                <div class="btn_area">
-                    <a href="/login">이미 회원이신가요? (로그인페이지)</a>
-                    <button type="submit" value="회원가입" id="btnJoin" class="btn_type btn_primary">회원가입</button>
-                </div>
             </div>
         </div>
     </form>
+    <div class="btn_area">
+        <a href="/login">이미 회원이신가요? (로그인페이지)</a>
+        <button value="회원가입" id="btnJoin" class="btn_type btn_primary">회원가입</button>
+    </div>
 </div>
 </body>
 </html>

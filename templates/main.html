@@ -46,6 +46,21 @@
             display: flex;
             justify-content: space-between;
         }
+
+        .current > a {
+            font-weight: bold;
+            background-color: #e9ecef;
+        }
+
+        .pagination {
+            justify-content: center;
+        }
+
+        .card-title {
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
     </style>
 </head>
 <body>
@@ -54,12 +69,12 @@
     <nav>
         {% if id != None %}
         <button type="button" class="btn btn-warning"><a href='/write'>글쓰기</a></button>
-        <button type="button" class="btn btn-info"><a href="/users/mypage?id={{ session['id'] }}">프로필</a></button>
+        <button type="button" class="btn btn-info"><a href="/users/{{id}}">프로필</a></button>
+        <button id="logout" type="button" class="btn btn-dark">로그아웃</button>
         {% elif id == None %}
         <button type="button" class="btn btn-primary"><a href="/login">로그인</a></button>
         <button type="button" class="btn btn-primary"><a href="/users">회원가입</a></button>
         {% endif %}
-        <button id="logout">로그아웃</button>
     </nav>
 </header>
 <hr>
@@ -87,9 +102,10 @@
         </div>
         {% endfor %}
     </div>
-    {{ pagination.links | safe }}
+    <nav aria-label="Page navigation example">
+        {{ pagination.links | safe }}
+    </nav>
 </div>
-
 </body>
 <script>
     $("#logout").click(function () {
@@ -104,5 +120,8 @@
             }
         })
     })
+    $(".pagination  ").removeClass(".pagination");
+    $("body > div > nav > ul > li").addClass("page-item");
+    $("body > div > nav > ul > li > a").addClass("page-link");
 </script>
 </html>
