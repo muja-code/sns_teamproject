@@ -139,7 +139,7 @@
 
 .mypage_midbox {
     width: 1000px;
-    height: 1000px;
+    height: 960px;
     margin: auto;
 }
 
@@ -182,7 +182,7 @@
 }
 
 #user_image {
-    width: 100%;
+    width: 50%;
     height: 100%;
     object-fit: cover;
 }
@@ -205,7 +205,7 @@
 .qwer {
     display: flex;
     width: 1000px;
-    height: 700px;
+    height: 400px;
 }
 
 .myedit_imgdel {
@@ -231,9 +231,8 @@ textarea {
     text-align: center;
 }
 
-.myedit_img {
-    width: 400px;
-    height: 400px;
-    margin: auto 70px auto;
-    overflow: hidden;
+.imgeditbtn {
+    width: 300px;
+    margin: auto;
+    text-align: center;
 }

@@ -161,3 +161,10 @@
 .btn-outline-dark:first-child {
     margin-left: 0;
 }
+
+#user_image {
+    width: 60%;
+    height: 60%;
+    object-fit: cover;
+    margin: auto;
+}
