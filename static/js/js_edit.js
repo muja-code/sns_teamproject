@@ -1,5 +1,8 @@
 $(document).ready(function () {
-    const id = 1;
+    const query = window.location.search;
+    const param = new URLSearchParams(query);
+    const id = param.get('id');
+    console.log(id)
     $.ajax({
         type: "GET",
         url: `/users/${id}`,
@@ -32,10 +35,10 @@ $(document).ready(function () {
             </div>
         </div>
         <div class="glbtn">
-            <button type="button" class="btn btn-outline-dark okbtn" id="profile_edit"><a href="/edit" class="card-link">확인</a></button>
+            <button type="button" class="btn btn-outline-dark okbtn" id="profile_edit"><a class="card-link">확인</a></button>
             <button type="button" class="btn btn-outline-dark cancelbtn"><a href="/" class="card-link">취소</a></button>
         </div>`
-            
+
             $('.myedit_main').append(temp_html)
 
             $("input[type=file]").change(function (event) {
@@ -68,7 +71,7 @@ $(document).ready(function () {
                     data: formData,
                     success: function (response) {
                         alert(response["msg"])
-                        window.location.href = "/mypage"
+                        window.location.href = "/users/mypage?id="+id;
                     }
                 })
             })

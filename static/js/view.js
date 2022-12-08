@@ -1,11 +1,11 @@
-function delete_board(num) {
-  $.ajax({
-    type: "DELETE",
-    url:  `/board/${num}`,
-    data: {},
-    success: function (response) {
-      alert(response["msg"]);
-      window.location.href="/board"
-    },
-  });
+function delete_board(id) {
+    $.ajax({
+        type: "DELETE",
+        url: `/board/${id}`,
+        data: {},
+        success: function (response) {
+            alert(response["msg"]);
+            window.location.href = "/board"
+        },
+    });
 }

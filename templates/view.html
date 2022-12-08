@@ -10,10 +10,16 @@
     <script src="../static/js/view.js"></script>
 </head>
 <body>
-<nav>
-    <a href="/">loge</a>
-    <a href="/write">글쓰기</a>
-</nav>
+<header>
+    <h1><a href="/">Yogurt</a></h1>
+    <nav>
+        {% if id != None %}
+        <button type="button" class="btn btn-warning"><a href='/write'>글쓰기</a></button>
+        <button type="button" class="btn btn-info"><a href="/users/{{id}}">프로필</a></button>
+        {% endif %}
+        <button id="logout">로그아웃</button>
+    </nav>
+</header>
 <div class="board_view_wrap">
     <div class="board_view">
         <div class="title">{{ list[0][1] }}</div>
@@ -46,9 +52,9 @@
     </div>
 </div>
 <div class="bt_wrap">
-   <a href="/edit_board/{{ list[0][0] }}">수정</a>
-   <a onclick="delete_board({{ list[0][0] }})" class="on">삭제</a>
-   <a href="/board" onclick="window.location.reload()">목록</a>
+    <a href="/board/edit/{{ list[0][0] }}">수정</a>
+    <a onclick="delete_board({{ list[0][0] }})" class="on">삭제</a>
+    <a href="/board" onclick="window.location.reload()">목록</a>
 </div>
 </body>
 </html>

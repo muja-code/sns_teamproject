@@ -1,5 +1,7 @@
 $(document).ready(function () {
-    const id = 1;
+    const query = window.location.search;
+    const param = new URLSearchParams(query);
+    const id = param.get('id');
     $.ajax({
         type: "GET", url: `/users/${id}`, data: {}, success: function (response) {
             const rows = response["users"];
@@ -20,7 +22,7 @@ $(document).ready(function () {
             </div>
         </div>
         <div class="glbtn">
-            <button type="button" class="btn btn-outline-dark"><a href="/edit" class="card-link">프로필 수정</a></button>
+            <button type="button" class="btn btn-outline-dark"><a href="/users/edit?id=${id}" class="card-link">프로필 수정</a></button>
             <button type="button" class="btn btn-outline-dark"><a href="/" class="card-link">홈으로</a></button>
         </div>`
             $('.mypage_main').append(temp_html)

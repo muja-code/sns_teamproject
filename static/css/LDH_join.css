@@ -1,0 +1,94 @@
+body {
+    background-size: cover;
+    opacity: 0.7;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    flex-direction: column;
+    background-color: #E6FFFF;
+}
+
+.list {
+    font-size: large
+}
+
+.list > span {
+    color: red;
+    font-size: small
+}
+
+.wrapper {
+    width: 520px;
+    border: 2px solid #ccc;
+    padding: 30px;
+    background: #fff;
+    border-radius: 10px;
+    border-color: seagreen;
+}
+
+input {
+    border: 1px solid black;
+    border-radius: 3px;
+    line-height: 35px;
+    font-size: 12px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+div {
+    padding-top: 3px;
+    padding-bottom: 8px;
+}
+
+.LDH_h2 {
+    text-align: center;
+    margin-bottom: 40px;
+    color: rgb(0, 122, 82)
+}
+
+.userInput1 input {
+    width: 100%;
+}
+
+.userInput2 input {
+    width: 100%
+}
+
+.userInput3 input {
+    width: 100%
+}
+
+.userInput4 input {
+    width: 100%
+}
+
+.userInput5 input {
+    width: 65%
+}
+
+.agree {
+    overflow: scroll;
+    width: 100%;
+    height: 200px;
+    border: 1px solid;
+}
+
+.mail_select {
+    width: 130px;
+    height: 40px;
+    border: 1px solid;
+}
+
+.select #check {
+    margin-left: 150px;
+}
+
+.btn_type {
+    float: right;
+    background: rgb(0, 122, 82);
+    padding: 5px;
+    color: #fff;
+    border-radius: 10px;
+    border: none;
+}
