@@ -145,7 +145,6 @@
 
 .card-body {
     text-align: center;
-    /*margin: auto;*/
     flex: none;
 }
 
@@ -228,13 +227,13 @@ input {
 
 textarea {
     width: 500px;
-    height: 300px;
+    height: 200px;
     text-align: center;
 }
 
 .myedit_img {
-    width: 19rem;
-    height: 19rem;
+    width: 400px;
+    height: 400px;
     margin: auto 70px auto;
     overflow: hidden;
 }

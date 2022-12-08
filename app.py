@@ -42,7 +42,7 @@ def get_users(id):
     curs.execute(sql, id)
 
     rows = curs.fetchall()
-    print(rows)
+
     result = {
         "user_id": rows[0][0],
         "user_name": rows[0][1],

@@ -22,8 +22,7 @@ $(document).ready(function () {
         <div class="glbtn">
             <button type="button" class="btn btn-outline-dark"><a href="/edit" class="card-link">프로필 수정</a></button>
             <button type="button" class="btn btn-outline-dark"><a href="/" class="card-link">홈으로</a></button>
-        </div>
-        `
+        </div>`
             $('.mypage_main').append(temp_html)
         }
     })

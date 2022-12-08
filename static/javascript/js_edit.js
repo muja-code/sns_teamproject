@@ -14,7 +14,9 @@ $(document).ready(function () {
             let temp_html = `
     <div class="card mypage_midbox">
         <div class="qwer">
+            <div class="myedit_img">
             <img src="${imgsrc}" id="user_image">
+            </div>
                 <label class="editlabel" for="img_edit">
                 <div class="btn-upload">사진 업로드</div>
                 </label>
