@@ -14,9 +14,7 @@ $(document).ready(function () {
             let temp_html = `
     <div class="card mypage_midbox">
         <div class="qwer">
-            <div class="myedit_img">
             <img src="${imgsrc}" id="user_image">
-            </div>
                 <label class="editlabel" for="img_edit">
                 <div class="btn-upload">사진 업로드</div>
                 </label>
@@ -37,6 +35,7 @@ $(document).ready(function () {
             <button type="button" class="btn btn-outline-dark okbtn" id="profile_edit"><a href="/edit" class="card-link">확인</a></button>
             <button type="button" class="btn btn-outline-dark cancelbtn"><a href="/" class="card-link">취소</a></button>
         </div>`
+            
             $('.myedit_main').append(temp_html)
 
             $("input[type=file]").change(function (event) {
