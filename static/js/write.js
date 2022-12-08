@@ -1,4 +1,5 @@
 function save_cont() {
+    console.log(id)
     let title = $("#title").val();
     let cont = $("#container").val();
     $.ajax({

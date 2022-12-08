@@ -15,7 +15,7 @@
     <nav>
         {% if id != None %}
         <button type="button" class="btn btn-warning"><a href='/write'>글쓰기</a></button>
-        <button type="button" class="btn btn-info"><a href="/users/{{id}}">프로필</a></button>
+        <button type="button" class="btn btn-info"><a href="/users/mypage">프로필</a></button>
         {% endif %}
         <button id="logout">로그아웃</button>
     </nav>
@@ -57,4 +57,18 @@
     <a href="/board" onclick="window.location.reload()">목록</a>
 </div>
 </body>
+<script>
+    $("#logout").click(function () {
+        $.ajax({
+            type: "POST",
+            url: `/logout`,
+            data: {},
+            success: function (response) {
+                console.log(response["msg"]);
+                alert("로그아웃 성공");
+                window.location.href = "/";
+            }
+        })
+    })
+</script>
 </html>

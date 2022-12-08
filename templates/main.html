@@ -69,11 +69,11 @@
     <nav>
         {% if id != None %}
         <button type="button" class="btn btn-warning"><a href='/write'>글쓰기</a></button>
-        <button type="button" class="btn btn-info"><a href="/users/{{id}}">프로필</a></button>
+        <button type="button" class="btn btn-info"><a href="/users/mypage">프로필</a></button>
         <button id="logout" type="button" class="btn btn-dark">로그아웃</button>
         {% elif id == None %}
         <button type="button" class="btn btn-primary"><a href="/login">로그인</a></button>
-        <button type="button" class="btn btn-primary"><a href="/users">회원가입</a></button>
+        <button type="button" class="btn btn-primary"><a href="/users/create">회원가입</a></button>
         {% endif %}
     </nav>
 </header>
@@ -98,7 +98,7 @@
                     </div>
                 </div>
             </div>
-            <a href="/board/{{ i[0] }}">보러가기</a>
+            <a href="/board/view/{{ i[0] }}">보러가기</a>
         </div>
         {% endfor %}
     </div>
