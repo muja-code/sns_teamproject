@@ -1,6 +1,6 @@
 //회원가입 유효성검사
 // 자원을 화면에 로드하게 되면 수행할 동작(==function)
-window.onload = function() {
+window.onload = function () {
     var join = document.join; //form데이터를 모두 join변수에 저장
 
     // 유효성검사할 부분을 class로 부여했기에 check class 태그를 모두 input에 저장 가져옴
@@ -60,16 +60,15 @@ window.onload = function() {
     // [ 이메일 입력 유효성검사 ]
     join.email.onkeydown = function () { //입력값과 정규식 범위와 같지 않다면
         innerReset(error); // 초기화 메서드 호출
-        var emailLimit = /[0-9a-zA-Z]{5,15}$/; // 정규식 0~9, a~z, A~Z, -, _, .내에서만 입력가능
+        var emailLimit = /[0-9a-zA-Z]{7,15}$/; // 정규식 0~9, a~z, A~Z, -, _, .내에서만 입력가능
         if (!emailLimit.test(input[4].value)) {  //입력값과 정규식 범위와 같지 않다면
             // 이메일의 오류 문구삽입
-            document.getElementById(errorId[4]).innerHTML = " 5~15자의 영문,숫자만 가능합니다.";
+            document.getElementById(errorId[4]).innerHTML = " 7~15자의 영문,숫자만 가능합니다.";
         }
     }
 //submit 실행시 수행할 동작
     join.onsubmit = function () { //join에서 submit이 실행된다면 수행할 함수
-        console.log("실행")
-        var errorStr = [" 아이디를", " 비밀번호를", " 비밀번호 확인을", " 성함을"," 이메일을"];
+        var errorStr = [" 아이디를", " 비밀번호를", " 비밀번호 확인을", " 성함을", " 이메일을"];
 
         innerReset(error); // 오류문구 초기화
 
@@ -93,8 +92,8 @@ window.onload = function() {
         // 정규식 변수 모음
         var idLimit = /^[a-zA-Z0-9]{5,20}$/; //정규식(a~z, A~Z, 0~9, -, _만 입력가능)
         var pwLimit = /^[a-zA-Z0-9~!@#$%^&*()_-]{10,20}$/;///[a-zA-Z0-9]{10, 20}/; //정규식(a~z, A~Z, 0~9,~!@#$%^&*()_-특수문자 만 입력가능)
-        var nameLimit = /[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]{2,3}$/;//정규식(ㄱ-ㅎ|ㅏ-ㅣ|가-힣만 입력가능)
-        var emailLimit = /[0-9a-zA-Z]{5,15}/; // 정규식 0~9, a~z, A~Z, -, _, .내에서만 입력가능
+        var nameLimit = /[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]{2,4}$/;//정규식(ㄱ-ㅎ|ㅏ-ㅣ|가-힣만 입력가능)
+        var emailLimit = /[0-9a-zA-Z]{7,15}/; // 정규식 0~9, a~z, A~Z, -, _, .내에서만 입력가능
 
         // [ ID 유효성검사 ]
         if (!idLimit.test(input[0].value)) {
@@ -112,13 +111,13 @@ window.onload = function() {
 
         // [ 이름 유효성검사 ]
         if (!nameLimit.test(input[3].value)) {
-            document.getElementById(errorId[3]).innerHTML = " 2자이상의 한글만 가능합니다.";
+            document.getElementById(errorId[3]).innerHTML = " 2~4자의 한글만 가능합니다.";
             join.name.focus(); // 포커스 이동
             return false;
         }
         // [ email 아이디 유효성검사 ]
         if (!emailLimit.test(input[4].value)) {
-            document.getElementById(errorId[4]).innerHTML = "5~15자의 영문,숫자만 가능합니다.";
+            document.getElementById(errorId[4]).innerHTML = "7~15자의 영문,숫자만 가능합니다.";
             join.email.focus(); // 포커스 이동
             return false;
         }
@@ -134,10 +133,8 @@ window.onload = function() {
         let user_id = $('#user_id').val()
         let user_pass1 = $('#user_pass1').val()
         let user_pass2 = $('#user_pass2').val()
-        let nick = $('#nick').val()
         let name = $('#name').val()
         let email = $('#email').val()
-        let disc = $('#disc').val()
 
         $.ajax({
             type: "POST",
@@ -146,19 +143,21 @@ window.onload = function() {
                 'user_id_give': user_id,
                 'user_pass1_give': user_pass1,
                 'user_pass2_give': user_pass2,
-                'nick_give': nick,
                 'name_give': name,
                 'email_give': email,
-                'disc_give': disc
             },
             success: function (response) {
                 alert(response["msg"])
                 window.location.reload();
+
             }
         });
-        return false
-         }
+
+
+        //join.onsublit
     }
+    //window
+}
 
 
 
