@@ -1,60 +1,62 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8"/>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 
     <!-- 반응형 -->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <link rel="stylesheet" href="../static/css/write.css"/>
+    <link rel="stylesheet" href="../static/css/write.css" />
+
     <!-- jquery CDN -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdn.ckeditor.com/ckeditor5/35.3.2/super-build/ckeditor.js"></script>
     <script src="https://cdn.ckeditor.com/ckeditor5/35.3.2/super-build/translations/es.js"></script>
+   
     <title>글쓰기</title>
-</head>
-<body>
-<div class="container">
-    <div class="board_write_wrap">
-        <form name="frm_pw" method="POST" action="/edit/{{list[0][0]}}">
-            <div class="board_write">
-                <div class="title">
-                    <dl>
-                        <dt>제목</dt>
-                        <dd>
-                            <input
-                                    type="text"
-                                    name="subject"
-                                    class="form-control"
-                                    placeholder="제목을 입력하세요!"
-                                    value="{{list[0][1]}}"
-                            />
-                        </dd>
-                    </dl>
-                </div>
-                <div id="container">
-                    <textarea name="contents" id="editor" class="form-control"></textarea>
-                </div>
-                <script>
-                    let tmpStr = "{{ list[0][2] }}";
-                    tmpStr = tmpStr.replaceAll("&lt;", "<");
-                    tmpStr = tmpStr.replaceAll("&gt;", ">");
-                    tmpStr = tmpStr.replaceAll("&amp;lt;", "<");
-                    tmpStr = tmpStr.replaceAll("&amp;gt;", ">");
-                    tmpStr = tmpStr.replaceAll("&amp;nbsp;", " ");
-                    tmpStr = tmpStr.replaceAll("&amp;amp;", "&");
-                    tmpStr = tmpStr.replaceAll("&#34;", '"');
-                    document.getElementById("editor").innerHTML = tmpStr;
-                </script>
-                <script src="../static/js/write.js"></script>
+  </head>
+  <body>
+    <div class="container">
+      <div class="board_write_wrap">
+        <form name="frm_pw" method="POST" action="/edit_board/{{list[0][0]}}">
+          <div class="board_write">
+            <div class="title">
+              <dl>
+                <dt>제목</dt>
+                <dd>
+                  <input
+                    type="text"
+                    name="subject"
+                    class="form-control"
+                    placeholder="제목을 입력하세요!"
+                    value="{{list[0][1]}}"
+                  />
+                </dd>
+              </dl>
             </div>
-            <div class="bt_wrap">
-                <button class="on"><a><input type="submit" value="수정" class="btn btn-default"/></a></button>
-                <button><a href="/board/{{ list[0][0] }}">취소</a></button>
+            <div id="container">
+              <textarea name="contents" id="editor" class="form-control"></textarea>
             </div>
+            <script>
+              let tmpStr = "{{ list[0][2] }}";
+              tmpStr = tmpStr.replaceAll("&lt;", "<");
+              tmpStr = tmpStr.replaceAll("&gt;", ">");
+              tmpStr = tmpStr.replaceAll("&amp;lt;", "<");
+              tmpStr = tmpStr.replaceAll("&amp;gt;", ">");
+              tmpStr = tmpStr.replaceAll("&amp;nbsp;", " ");
+              tmpStr = tmpStr.replaceAll("&amp;amp;", "&");
+              tmpStr = tmpStr.replaceAll("&#34;", '"');
+              document.getElementById("editor").innerHTML = tmpStr;
+            </script>
+            <script src="../static/js/write.js"></script>
+          </div>
+          <div class="bt_wrap">
+            <button class="on"><a><input type="submit" value="수정" class="btn btn-default" /></a></button>
+            <button><a href="/board/{{ list[0][0] }}">취소</a></button>
+          </div>
         </form>
+      </div>
     </div>
-</div>
-</body>
+  </body>
 </html>

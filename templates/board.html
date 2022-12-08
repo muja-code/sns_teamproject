@@ -1,38 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8"/>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-    <link rel="stylesheet" href="../static/css/board.css"/>
+    <link rel="stylesheet" href="../static/css/board.css" />
     <title>my page</title>
     <script src="../static/js/board.js"></script>
-</head>
-<body>
-<nav>
-    <a href="/">loge</a>
-    <a href="/write">글쓰기</a>
-</nav>
-<div class="board_wrap">
-    <div class="board_title">
-        <img src="" alt=""/>
-        <strong>{{ data_list[0][9] }}</strong>
-    </div>
-    <div class="board_list_wrap">
-        <div class="board_list">
-            {% for i in data_list %}
-            <a href="/board/{{ i[0] }}" onclick="hit()">{{ i[1] }}</a>
+  </head>
+  <body>
+    <nav>
+      <a href="/">loge</a>
+      <a href="/write">글쓰기</a>
+    </nav>
+    {{ pagination.info }}
+    <div class="board_wrap">
+      <div class="board_title">
+        <img src="" alt="" />
+        <strong>{{ data_lists[0][3] }}</strong>
+      </div>
 
-            <div class="blank"></div>
-            <div class="date">작성일 : {{ i[4] }}</div>
-            <div class="view_count">조회 : {{ i[5] }}</div>
-            <div class="comment_count">댓글 : {{ i[6] }}</div>
-            <div class="blank"></div>
-            {% endfor %}
+      <div class="board_list_wrap">
+        <div class="board_list">
+          {% for i in data_lists %}
+          <a href="/board/{{ i[0] }}" onclick="hit()">{{ i[1] }}</a>
+          <div class="blank"></div>
+          <div class="date">작성일 : {{ i[4] }}</div>
+          <div class="view_count">조회 : {{ i[5] }}</div>
+          <div class="comment_count">댓글 : {{ i[6] }}</div>
+          <div class="blank"></div>
+          {% endfor %}
         </div>
-        <div class="board_page"></div>
+      </div>
     </div>
-</div>
-</body>
+    {{ pagination.links }}
+  </body>
 </html>

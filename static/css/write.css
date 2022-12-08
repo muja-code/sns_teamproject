@@ -51,20 +51,19 @@
   min-width: 80px;
   margin-left: 10px;
   height: 40px;
-  
   border: 1px solid #000;
   border-radius: 2px;
   font-size: 1.4rem;
   text-decoration: none;
+  align-items: center;
+  text-align: center;
 }
 .bt_wrap a:first-child{
   margin-left: 0;
 }
-
 .bt_wrap .on {
   background:  #000;
   cursor: pointer;
-
 }
 /* .ck-content {
   height: 750px;
@@ -81,7 +80,6 @@
   max-width: 80%;
   margin: 20px auto;
 }
-
 button {
   text-decoration: none;
   color: inherit;
@@ -94,4 +92,3 @@ input[type=submit] {
   width: 100%;
   height: 100%;
 }
-
