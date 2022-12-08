@@ -1,0 +1,240 @@
+/*.body {*/
+/*    display: flex;*/
+/*    flex-direction: column;*/
+/*}*/
+
+/*.myedit_main {*/
+/*    width: 100%;*/
+/*    height: 100%;*/
+/*    text-align: center;*/
+/*    margin: auto;*/
+/*}*/
+
+/*.myedit_header {*/
+/*    width: 100%;*/
+/*    height: 7rem;*/
+/*    margin: auto;*/
+/*    padding: 30px;*/
+/*    text-align: center;*/
+/*}*/
+
+/*.myedit_mid {*/
+/*    width: 90%;*/
+/*    height: 68rem;*/
+/*    margin: 100px auto;*/
+/*    padding: 30px;*/
+/*    text-align: center;*/
+/*}*/
+
+/*.myedit_midbox {*/
+/*    width: 50rem;*/
+/*    height: 20rem;*/
+/*    margin: auto auto 5px auto;*/
+/*    display: flex;*/
+/*}*/
+
+/*.myedit_img {*/
+/*    width: 19rem;*/
+/*    height: 19rem;*/
+/*    margin: auto 70px auto;*/
+/*    overflow: hidden;*/
+/*}*/
+
+/*#user_image {*/
+/*    width: 100%;*/
+/*    height: 100%;*/
+/*    object-fit: cover;*/
+/*}*/
+
+/*.img_button {*/
+/*    height: 100px;*/
+/*    display: flex;*/
+/*    text-align: center;*/
+/*    margin: auto;*/
+/*    padding: 30px;*/
+/*}*/
+
+/*.myedit_imgdel {*/
+/*    margin: 0 10px 0 10px;*/
+/*    width: 100px;*/
+/*    height: 100px;*/
+/*    border-radius: 20px;*/
+/*    border-width: 1px;*/
+/*    font-size: 16px;*/
+/*}*/
+
+/*.myedit_name {*/
+/*    width: 50rem;*/
+/*    height: 4rem;*/
+/*    margin: 5px auto 5px auto;*/
+/*    font-size: 2rem;*/
+/*    text-align: center;*/
+/*}*/
+
+/*.myedit_email {*/
+/*    width: 50rem;*/
+/*    height: 4rem;*/
+/*    margin: 5px auto 5px auto;*/
+/*    font-size: 1.75rem;*/
+/*    border: 1px solid #000;*/
+/*    text-align: center;*/
+/*}*/
+
+/*.myedit_disc {*/
+/*    width: 50rem;*/
+/*    height: 10rem;*/
+/*    font-size: 1rem;*/
+/*    margin: 5px auto 5px auto;*/
+/*    border: 1px solid #000;*/
+/*    text-align: center;*/
+/*}*/
+
+/*.myedit_bottom {*/
+/*    width: 15rem;*/
+/*    height: 5rem;*/
+/*    margin: 30px auto;*/
+/*    text-align: center;*/
+/*    line-height: 5rem;*/
+/*    padding: 30px 0px 0px 0px;*/
+/*}*/
+
+/*.okbtn {*/
+/*    width: 7rem;*/
+/*    height: 3rem;*/
+/*    border-radius: 15px;*/
+/*    border-width: 1px;*/
+/*}*/
+
+/*.cancelbtn {*/
+/*    width: 7rem;*/
+/*    height: 3rem;*/
+/*    border-radius: 15px;*/
+/*    border-width: 1px;*/
+/*}*/
+
+
+/*.btn-upload {*/
+/*    margin: 0 10px 0 10px;*/
+/*    width: 100px;*/
+/*    height: 100px;*/
+/*    line-height: 6rem;*/
+/*    background-color: #f0f0f0;*/
+/*    border-radius: 20px;*/
+/*    border: 1px solid #000;*/
+/*}*/
+
+/*.myedit_imgupload {*/
+/*    display: none;*/
+/*}*/
+
+/*.name_edit {*/
+/*    width: 10rem;*/
+/*}*/
+
+.mypage_main {
+    width: 1000px;
+    height: 1000px;
+    margin: auto;
+}
+
+.mypage_midbox {
+    width: 1000px;
+    height: 1000px;
+    margin: auto;
+}
+
+.card-body {
+    text-align: center;
+    /*margin: auto;*/
+    flex: none;
+}
+
+.card > .list-group {
+    border-top: inherit;
+    border-bottom: inherit;
+    text-align: center;
+    font-size: 1.5rem;
+}
+
+.glbtn {
+    width: 1000px;
+    height: 100px;
+    display: flex;
+    justify-content: center;
+    position: relative;
+    margin: 0 auto;
+}
+
+.btn-outline-dark {
+    margin-top: 20px;
+    margin-left: 20px;
+    width: 1000px;
+    border-radius: 20px;
+}
+
+.btn-outline-dark a {
+    text-decoration: none;
+    color: black;
+    font-size: 1.5rem;
+}
+
+.btn-outline-dark:first-child {
+    margin-left: 0;
+}
+
+#user_image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.btn-upload {
+    margin: 0 10px 0 10px;
+    width: 100px;
+    height: 100px;
+    line-height: 6rem;
+    background-color: #f0f0f0;
+    border-radius: 20px;
+    border: 2px solid #000;
+    text-align: center;
+}
+
+.myedit_imgupload {
+    display: none;
+}
+
+.qwer {
+    display: flex;
+    width: 1000px;
+    height: 700px;
+}
+
+.myedit_imgdel {
+    width: 100px;
+    height: 100px;
+    margin: auto;
+    border-radius: 20px;
+}
+
+label {
+    display: inline-block;
+    margin: auto;
+}
+
+input {
+    width: 500px;
+    text-align: center;
+}
+
+textarea {
+    width: 500px;
+    height: 300px;
+    text-align: center;
+}
+
+.myedit_img {
+    width: 19rem;
+    height: 19rem;
+    margin: auto 70px auto;
+    overflow: hidden;
+}
