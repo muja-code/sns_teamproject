@@ -55,9 +55,9 @@
     <nav>
         {% if id != None %}
         <button type="button" class="btn btn-warning"><a href='/write'>글쓰기</a></button>
-        <button type="button" class="btn btn-info"><a href="/users/{{id}}">프로필</a></button>
+        <button type="button" class="btn btn-info"><a href="/users/mypage">프로필</a></button>
+        <button id="logout" type="button" class="btn btn-dark">로그아웃</button>
         {% endif %}
-        <button id="logout">로그아웃</button>
     </nav>
 </header>
 {{ pagination.info }}
@@ -70,7 +70,7 @@
     <div class="board_list_wrap">
         <div class="board_list">
             {% for i in data_lists %}
-            <a href="/board/{{ i[0] }}" onclick="hit()">{{ i[1] }}</a>
+            <a href="/board/view/{{ i[0] }}" onclick="hit()">{{ i[1] }}</a>
             <div class="blank"></div>
             <div class="date">작성일 : {{ i[4] }}</div>
             <div class="view_count">조회 : {{ i[5] }}</div>
@@ -83,6 +83,19 @@
 {{ pagination.links }}
 </body>
 <script>
+    $("#logout").click(function () {
+        $.ajax({
+            type: "POST",
+            url: `/logout`,
+            data: {},
+            success: function (response) {
+                console.log(response["msg"]);
+                alert("로그아웃 성공");
+                window.location.href = "/";
+            }
+        })
+    })
+
     $("#logout").click(function () {
         $.ajax({
             type: "POST",

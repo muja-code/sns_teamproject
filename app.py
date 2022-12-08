@@ -1,7 +1,7 @@
 import os
 
 import pymysql
-from flask import Flask, render_template, request, jsonify, session, redirect, flash, Blueprint
+from flask import Flask, render_template, request, jsonify, session, redirect, flash
 from flask_bcrypt import Bcrypt
 from werkzeug.utils import secure_filename
 from flask_paginate import Pagination, get_page_args
@@ -11,8 +11,6 @@ app = Flask(__name__)
 app.config["SECRET_KEY"] = "secret_pw_key"
 app.config["BCRYPT_LEVEL"] = 10
 bcrypt = Bcrypt(app)
-
-mod = Blueprint('users', __name__)
 
 UPLOAD_FOLDER = 'static/img'
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'}
@@ -54,7 +52,7 @@ def home():
                            name=session["name"], css_framework='foundation', bs_version=5)
 
 
-@app.route('/users')
+@app.route('/users/create')
 def user_page():
     return render_template("creat_user.html")
 
@@ -63,8 +61,6 @@ def user_page():
 def login_info_post():
     db = pymysql.connect(host='localhost', user='root', password='0000', database='yogurt', charset='utf8')
     cursor = db.cursor()
-    print(1)
-    print(request.form)
     user_id_receive = request.form['user_id_give']
     user_pass_receive = request.form['user_pass1_give']
     name_receive = request.form['name_give']
@@ -72,17 +68,17 @@ def login_info_post():
     disc_receive = request.form['disc_give']
     img_receive = request.form['img_give']
 
-    # pw_hash = bcrypt.generate_password_hash(user_pass_receive)
+    pw_hash = bcrypt.generate_password_hash(user_pass_receive)
 
     sql = 'INSERT INTO user (user_id, user_pw, user_name, user_email, user_image, user_disc) values(%s, %s, %s, %s, %s, %s)'
-    cursor.execute(sql, (user_id_receive, user_pass_receive, name_receive, email_receive, img_receive, disc_receive))
+    cursor.execute(sql, (user_id_receive, pw_hash, name_receive, email_receive, img_receive, disc_receive))
 
     db.commit()
     db.close()
     print(2)
     flash("회원가입 성공!!")
     print(3)
-    return jsonify({"msg":"성공!"})
+    return jsonify({"msg": "성공!"})
 
 
 @app.route('/write')
@@ -96,6 +92,11 @@ def write():
 
 @app.route('/board', methods=['GET'])
 def board():
+    if "id" not in session:
+        flash("로그인을 하세요!!")
+        return render_template("login.html")
+
+    id = session["id"]
     per_page = 8
     page, _, offset = get_page_args(per_page=per_page)
 
@@ -106,12 +107,14 @@ def board():
     db = pymysql.connect(host='localhost', user='root', db='yogurt', password='0000', charset='utf8')
     curs = db.cursor()
 
-    curs.execute("SELECT COUNT(*) FROM board;")
+    curs.execute("SELECT COUNT(*) FROM board WHERE id=%s;", id)
 
     all_count = curs.fetchall()[0][0]
 
-    curs.execute("SELECT * FROM board ORDER BY `date` DESC LIMIT %s OFFSET %s;", (per_page, offset))
+    curs.execute("SELECT * FROM board WHERE user_id=%s ORDER BY `date` DESC LIMIT %s OFFSET %s;",
+                 (id, per_page, offset))
     data_list = curs.fetchall()
+    print(data_list)
 
     db.commit()
     db.close()
@@ -122,7 +125,7 @@ def board():
     return render_template('board.html', data_lists=data_list, pagination=pagination)
 
 
-@app.route('/board/<id>', methods=['GET'])
+@app.route('/board/view/<id>', methods=['GET'])
 def view(id):
     if "id" not in session:
         flash("로그인을 하세요!!")
@@ -209,14 +212,14 @@ def edit(id):
     title = request.form["subject"]
     cont = request.form["contents"]
 
-    sql = f"UPDATE board SET title = %s, contents = %s WHERE num = '{id}';"
+    sql = f"UPDATE board SET title = %s, contents = %s WHERE id = '{id}';"
 
     curs.execute(sql, (title, cont))
 
     db.commit()
     db.close()
 
-    return redirect(f'/board/{id}')
+    return redirect(f'/board/view/{id}')
 
 
 @app.route("/board/<id>", methods=["DELETE"])
@@ -240,6 +243,7 @@ def login_page():
 
 @app.route('/login', methods=["POST"])
 def login():
+
     db = pymysql.connect(host='localhost', user='root', db='yogurt', password='0000', charset='utf8')
     curs = db.cursor()
 
@@ -250,15 +254,20 @@ def login():
    '''
     curs.execute(sql, user_id)
 
+
     rows = curs.fetchall()
+    if (rows == ()):
+        return jsonify({"msg": "아이디를 확인해주세요^^", "check": False})
+
+
     is_login = bcrypt.check_password_hash(rows[0][1], user_pw)
 
     if is_login == False:
-        return jsonify({'login': False}), 401
+        return jsonify({"msg":"비밀번호를 확인해주세요^^", "check":False})
 
     session["id"] = rows[0][0]
     session["name"] = rows[0][2]
-    return redirect("/")
+    return jsonify({"msg":"로그인 성공^^", "check":True})
 
 
 @app.route('/logout', methods=["POST"])
@@ -267,8 +276,9 @@ def logout():
     return jsonify({'msg': "logout secces!"}), 200
 
 
-@app.route('/users/<id>', methods=["PUT"])
-def put_users(id):
+@app.route('/users', methods=["PUT"])
+def put_users():
+    id = session["id"]
     db = pymysql.connect(host='localhost', user='root', db='yogurt', password='0000', charset='utf8')
     curs = db.cursor()
 
@@ -299,19 +309,18 @@ def put_users(id):
     return jsonify({'msg': '수정이 완료되었습니다'}), 200
 
 
-@app.route('/users/<id>', methods=["GET"])
-def get_users(id):
-    print(id)
-    print(1)
+@app.route('/users', methods=["GET"])
+def get_users():
+    if "id" not in session:
+        flash("로그인을 하세요!!")
+        return render_template("login.html")
+    id = session["id"]
     db = pymysql.connect(host='localhost', user='root', db='yogurt', password='0000', charset='utf8')
     curs = db.cursor()
-    print(2)
     sql = '''SELECT user_id, user_name, user_email, user_disc, user_image FROM `user` AS u WHERE u.id=%s'''
-    print(3)
     curs.execute(sql, id)
-    print(4)
     rows = curs.fetchall()
-    print(5)
+
     result = {
         "user_id": rows[0][0],
         "user_name": rows[0][1],
@@ -322,7 +331,6 @@ def get_users(id):
 
     db.commit()
     db.close()
-    print(6)
     return jsonify({'users': result}), 200
 
 

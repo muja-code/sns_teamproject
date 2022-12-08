@@ -13,9 +13,16 @@
     <script src="../static/js/js_edit.js"></script>
 </head>
 <body>
-<nav class="myedit_header">
-    네비게이션 바
-</nav>
+<header>
+    <h1><a href="/">Yogurt</a></h1>
+    <nav>
+        {% if id != None %}
+        <button type="button" class="btn btn-warning"><a href='/write'>글쓰기</a></button>
+        <button type="button" class="btn btn-info"><a href="/users">프로필</a></button>
+        <button id="logout" type="button" class="btn btn-dark">로그아웃</button>
+        {% endif %}
+    </nav>
+</header>
 <div class="myedit_main"></div>
 <!--<div class="myedit_main">-->
 <!--    <div class="myedit_mid">-->

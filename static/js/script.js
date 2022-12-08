@@ -2,7 +2,7 @@ $(document).ready(function () {
     $("#login").click(function () {
         const id = $("#inputId").val();
         const pw = $("#inputPassword").val();
-
+        console.log("클릭1")
         $.ajax({
             type: "POST",
             url: `/login`,
@@ -11,9 +11,13 @@ $(document).ready(function () {
                 pw: pw
             },
             success: function (response) {
-                console.log(response["msg"]);
-                alert("로그인 성공");
-                window.location.href = "/";
+                alert(response["msg"]);
+                if (response["check"]) {
+                    window.location.href = "/";
+                } else {
+                    window.location.reload();
+                }
+
             }
         })
     })

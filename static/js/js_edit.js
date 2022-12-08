@@ -1,11 +1,7 @@
 $(document).ready(function () {
-    const query = window.location.search;
-    const param = new URLSearchParams(query);
-    const id = param.get('id');
-    console.log(id)
     $.ajax({
         type: "GET",
-        url: `/users/${id}`,
+        url: `/users`,
         data: {},
         success: function (response) {
             const rows = response["users"];
@@ -65,13 +61,13 @@ $(document).ready(function () {
 
                 $.ajax({
                     type: "PUT",
-                    url: `/users/${id}`,
+                    url: `/users`,
                     processData: false,
                     contentType: false,
                     data: formData,
                     success: function (response) {
                         alert(response["msg"])
-                        window.location.href = "/users/mypage?id="+id;
+                        window.location.href = "/users/mypage";
                     }
                 })
             })
