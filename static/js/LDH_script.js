@@ -158,7 +158,13 @@ $(document).ready(function () {
             },
             success: function (response) {
                 console.log(response["msg"])
-                window.location.href = "/login";
+                if (response["check"]) {
+                    window.location.href = "/login";
+                } else {
+                    alert(response["msg"]);
+                    window.location.reload();
+                }
+
             }
         });
     })

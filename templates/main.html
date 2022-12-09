@@ -14,47 +14,54 @@
     <link rel="stylesheet" href="../static/css/main.css"/>
 </head>
 <body>
+{% with messages = get_flashed_messages() %} {% if messages %}
+    <script type="text/javascript">
+        alert("{{messages[-1]}}");
+    </script>
+{% endif %} {% endwith %}
 <header>
     <h1><a class="header_a" href="/">Yogurt</a></h1>
     <nav>
         {% if id != None %}
-        <button type="button" class="btn btn-warning"><a href='/write'>글쓰기</a></button>
-        <button type="button" class="btn btn-info"><a href="/users/mypage">프로필</a></button>
-        <button id="logout" type="button" class="btn btn-dark">로그아웃</button>
+            <button type="button" class="btn btn-warning"><a href='/write'>글쓰기</a></button>
+            <button type="button" class="btn btn-info"><a href="/users/mypage">프로필</a></button>
+            <button id="logout" type="button" class="btn btn-dark">로그아웃</button>
         {% elif id == None %}
-        <button type="button" class="btn btn-primary"><a href="/login">로그인</a></button>
-        <button type="button" class="btn btn-primary"><a href="/users/create">회원가입</a></button>
+            <button type="button" class="btn btn-primary"><a href="/login">로그인</a></button>
+            <button type="button" class="btn btn-primary"><a href="/users/create">회원가입</a></button>
         {% endif %}
     </nav>
 </header>
 <hr>
 
-<div class="container">
-    <div class="row row-cols-auto">
-        {% for i in data_lists %}
-        <div class="col" onclick="location.href='/board/view/{{ i[0] }}';">
-            <div class="card" style="width: 18rem;">
-                <img src="../static/img/smit200600015.png" class="card-img-top" alt="...">
-                <div class="card-body">
-                    <br>
-                    <h5 class="card-title">{{ i[1] }}</h5>
-                    <br>
-                    <figcaption class="blockquote-footer">
-                        {{ i[4] }} /{{ i[6] }}개의 댓글
-                    </figcaption>
-                    <hr>
-                    <div class="info">
-                        <span>{{ i[3] }}</span><span>조회수: {{ i[5] }}</span>
+{% if pagination %}
+    <div class="container">
+        <div class="row row-cols-auto">
+            {% for i in data_lists %}
+                <div class="col" onclick="location.href='/board/view/{{ i[0] }}';">
+                    <div class="card" style="width: 18rem;">
+                        <img src="../static/img/smit200600015.png" class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <br>
+                            <h5 class="card-title">{{ i[1] }}</h5>
+                            <br>
+                            <figcaption class="blockquote-footer">
+                                {{ i[4] }} /{{ i[6] }}개의 댓글
+                            </figcaption>
+                            <hr>
+                            <div class="info">
+                                <span>{{ i[3] }}</span><span>조회수: {{ i[5] }}</span>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
+            {% endfor %}
         </div>
-        {% endfor %}
+        <nav aria-label="Page navigation example">
+            {{ pagination.links | safe }}
+        </nav>
     </div>
-    <nav aria-label="Page navigation example">
-        {{ pagination.links | safe }}
-    </nav>
-</div>
+{% endif %}
 </body>
 <script>
     $("#logout").click(function () {
