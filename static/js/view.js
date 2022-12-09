@@ -1,7 +1,7 @@
-function delete_board(id, user_id) {
+function delete_board(id) {
     $.ajax({
         type: "DELETE",
-        url: `/board/${id}`,
+        url: `/board/delete/${id}`,
         data: {},
         success: function (response) {
             alert(response["msg"]);

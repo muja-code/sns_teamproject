@@ -1,10 +1,49 @@
-@import url(media.css);
-@import url(nav.css);
 a {
   text-decoration: none;
-  color: inherit;
+  color: white;
+}
+.col {
+  cursor: pointer;
+}
+header {
+  width: 1400px;
+  height: 100px;
+  text-align: center;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0 auto;
 }
 
-html {
-  font-size: 10px;
+header > h1 > a {
+  color: black;
+}
+
+.container {
+  margin-top: 50px;
+}
+
+
+.blockquote-footer {
+  margin-top: 5px;
+}
+
+.info {
+  display: flex;
+  justify-content: space-between;
+}
+
+.current > a {
+  font-weight: bold;
+  background-color: #e9ecef;
+}
+
+.pagination {
+  justify-content: center;
+}
+
+.card-title {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }

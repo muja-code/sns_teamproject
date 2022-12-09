@@ -1,74 +1,92 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8"/>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <link rel="stylesheet" href="../static/css/view.css"/>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+      crossorigin="anonymous"
+    />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+      crossorigin="anonymous"
+    ></script>
+    <link rel="stylesheet" href="/static/css/view.css" />
+    <script src="/static/js/view.js"></script>
     <title>main</title>
-    <script src="../static/js/view.js"></script>
-</head>
-<body>
-<header>
-    <h1><a href="/">Yogurt</a></h1>
-    <nav>
+   
+  </head>
+  <body>
+    <header>
+      <h1><a href="/">Yogurt</a></h1>
+      <nav>
         {% if id != None %}
-        <button type="button" class="btn btn-warning"><a href='/write'>글쓰기</a></button>
-        <button type="button" class="btn btn-info"><a href="/users/mypage">프로필</a></button>
+        <button type="button" class="btn btn-warning">
+          <a href="/write">글쓰기</a>
+        </button>
+        <button type="button" class="btn btn-info">
+          <a href="/users/mypage">프로필</a>
+        </button>
         {% endif %}
         <button id="logout">로그아웃</button>
-    </nav>
-</header>
-<div class="board_view_wrap">
-    <div class="board_view">
+      </nav>
+    </header>
+    <div class="board_view_wrap">
+      <div class="board_view">
         <div class="title">{{ list[0][1] }}</div>
         <div class="info">
-            <dl>
-                <dt>글쓴이</dt>
-                <dd>{{ list[0][9] }}</dd>
-            </dl>
-            <dl>
-                <dt>작성일</dt>
-                <dd>{{ list[0][4] }}</dd>
-            </dl>
-            <dl>
-                <dt>조회</dt>
-                <dd>{{ list[0][5] }}</dd>
-            </dl>
+          <dl>
+            <dt>글쓴이</dt>
+            <dd>{{ list[0][9] }}</dd>
+          </dl>
+          <dl>
+            <dt>작성일</dt>
+            <dd>{{ list[0][4] }}</dd>
+          </dl>
+          <dl>
+            <dt>조회</dt>
+            <dd>{{ list[0][5] }}</dd>
+          </dl>
         </div>
         <div id="content"></div>
         <script>
-            let tmpStr = "{{ list[0][2] }}"
-            tmpStr = tmpStr.replaceAll("&lt;", "<");
-            tmpStr = tmpStr.replaceAll("&gt;", ">");
-            tmpStr = tmpStr.replaceAll("&amp;lt;", "<");
-            tmpStr = tmpStr.replaceAll("&amp;gt;", ">");
-            tmpStr = tmpStr.replaceAll("&amp;nbsp;", " ");
-            tmpStr = tmpStr.replaceAll("&amp;amp;", "&");
-            tmpStr = tmpStr.replaceAll("&#34;", '"');
-            document.getElementById("content").innerHTML = tmpStr;
+          let tmpStr = "{{ list[0][2] }}";
+          tmpStr = tmpStr.replaceAll("&lt;", "<");
+          tmpStr = tmpStr.replaceAll("&gt;", ">");
+          tmpStr = tmpStr.replaceAll("&amp;lt;", "<");
+          tmpStr = tmpStr.replaceAll("&amp;gt;", ">");
+          tmpStr = tmpStr.replaceAll("&amp;nbsp;", " ");
+          tmpStr = tmpStr.replaceAll("&amp;amp;", "&");
+          tmpStr = tmpStr.replaceAll("&#34;", '"');
+          document.getElementById("content").innerHTML = tmpStr;
         </script>
+      </div>
     </div>
-</div>
-<div class="bt_wrap">
-    <a href="/board/edit/{{ list[0][0] }}">수정</a>
-    <a onclick="delete_board({{ list[0][0] }})" class="on">삭제</a>
-    <a href="/board" onclick="window.location.reload()">목록</a>
-</div>
-</body>
-<script>
+    <div class="bt_wrap">
+      {% if session["id"] == list[0][7] %}
+      <a href="/board/edit/{{ list[0][0] }}" class="off">수정</a>
+      <a onclick="delete_board({{ list[0][0] }})" class="on">삭제</a>
+      {% endif %}
+      <a href="/board" onclick="window.location.reload()" class="off">목록</a>
+    </div>
+  </body>
+  <script>
     $("#logout").click(function () {
-        $.ajax({
-            type: "POST",
-            url: `/logout`,
-            data: {},
-            success: function (response) {
-                console.log(response["msg"]);
-                alert("로그아웃 성공");
-                window.location.href = "/";
-            }
-        })
-    })
-</script>
+      $.ajax({
+        type: "POST",
+        url: `/logout`,
+        data: {},
+        success: function (response) {
+          console.log(response["msg"]);
+          alert("로그아웃 성공");
+          window.location.href = "/";
+        },
+      });
+    });
+  </script>
 </html>

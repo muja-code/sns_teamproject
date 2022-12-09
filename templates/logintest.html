@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../static/css/logintest.css" />
+    <title>Document</title>
+  </head>
+  <body>
+    <header>
+      <h1>YOGURT</h1>
+    </header>
+    {% with messages = get_flashed_messages() %} {% if messages %}
+    <script type="text/javascript">
+      alert("{{messages[-1]}}");
+    </script>
+    {% endif %} {% endwith %}
+    <div class="container" onclick="onclick">
+      <div class="top"></div>
+      <div class="bottom"></div>
+      <div class="center">
+        <h2>Please Sign In</h2>
+        <input type="email" placeholder="email" />
+        <input type="password" placeholder="password" />
+        <h2>&nbsp;</h2>
+        <div class="btn_group">
+          <button type="button" id="login" class="btn btn-light">로그인</button>
+          <button type="button" id="create" class="btn btn-primary">
+            <a href="/users">회원가입</a>
+          </button>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

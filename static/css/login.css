@@ -1,0 +1,69 @@
+header {
+  width: 100%;
+  height: 100px;
+
+  text-align: center;
+}
+
+header > h1 {
+  display: flex;
+  justify-content: center;
+  margin-top: 50px;
+}
+
+h2 {
+  margin-bottom: 50px;
+  text-align: center;
+}
+
+.main {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.login_form {
+  width: 500px;
+  height: 300px;
+
+  margin-top: 80px;
+
+  padding: 20px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  border-radius: 10px;
+
+  box-shadow: 2px 3px 5px 0px #888888;
+
+  background-color: #BEEFFF;
+}
+
+#create > a {
+  text-decoration: none;
+!important;
+  color: white;
+}
+
+#create > a:hover {
+  text-decoration: none;
+!important;
+}
+
+.btn-light {
+  border: 1px solid #dddddd;
+}
+
+.btn-light:hover {
+  background-color: #dddddd;
+  border: 1px solid #dddddd;
+}
+
+.btn_group {
+  text-align: right;
+}
