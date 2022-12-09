@@ -9,12 +9,12 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
             integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
             crossorigin="anonymous"></script>
-    <link href="../static/mypage_css.css" rel="stylesheet">
+    <link rel="stylesheet" href="../static/css/mypage_css.css"/>
     <script src="../static/js/js.js"></script>
 </head>
 <body>
 <header>
-    <h1><a href="/">Yogurt</a></h1>
+    <h1><a class="header_a" href="/">Yogurt</a></h1>
     <nav>
         {% if id != None %}
         <button type="button" class="btn btn-warning"><a href='/write'>글쓰기</a></button>
@@ -23,45 +23,7 @@
         {% endif %}
     </nav>
 </header>
-<div class="mypage_main">
-    <!--    <div class="mypage_mid">-->
-    <!--        <div class="mypage_midbox">-->
-    <!--            <div class="mypage_img">-->
-    <!--                <img src="../static/img/default-user-image.png" id="mainimg">-->
-    <!--            </div>-->
-    <!--            <div class="mypage_name">-->
-    <!--                이름 : ${name}-->
-    <!--            </div>-->
-    <!--            <div class="mypage_email">-->
-    <!--                이메일 : ${email}-->
-    <!--            </div>-->
-    <!--            <div class="mypage_disc">-->
-    <!--                자기소개<p>${disc}</p>-->
-    <!--            </div>-->
-    <!--            <div class="editbtn">-->
-    <!--                <a href="/edit">-->
-    <!--                    <button class="mybtn" type="button">프로필 수정</button>-->
-    <!--                </a>-->
-    <!--            </div>-->
-    <!--        </div>-->
-    <!--    </div>-->
-</div>
-
-<!--<div class="card" style="width: 18rem;">-->
-<!--    <img src="${imgsrc}" id="user_image">-->
-<!--    <div class="card-body">-->
-<!--        <h5 class="card-title mypage_name">이름 : ${name}</h5>-->
-<!--    </div>-->
-<!--    <ul class="list-group list-group-flush">-->
-<!--        <li class="list-group-item mypage_email">이메일 : ${email}</li>-->
-<!--        <li class="list-group-item mypage_disc">${disc}/li>-->
-<!--        <li class="list-group-item">A third item</li>-->
-<!--    </ul>-->
-<!--    <div class="card-body">-->
-<!--        <button type="button" class="btn btn-outline-dark"><a href="/edit" class="card-link">프로필 수정</a></button>-->
-<!--        <button type="button" class="btn btn-outline-dark"><a href="/" class="card-link">홈으로</a></button>-->
-<!--    </div>-->
-<!--</div>-->
+<div class="mypage_main"></div>
 </body>
 <script>
     $("#logout").click(function () {

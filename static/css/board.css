@@ -1,10 +1,6 @@
-@import url(media.css);
-@import url(main.css);
-@import url(nav.css);
-
 .board_wrap {
   width: 1000px;
-  margin: 100px auto
+  margin: 10px auto
 }
 
 .board_title {
@@ -34,12 +30,11 @@
 }
 
 .pagination-page-info {
-  padding: .6em;
-  padding-left: 0;
-  width: 40em;
-  margin: .5em;
+  padding: 0.6em;
+  padding-right: 0;
+  margin: 0.5em;
   margin-left: 0;
-  font-size: 12px;
+  font-size: 15px;
 }
 .pagination-page-info b {
   color: black;
@@ -57,4 +52,57 @@
   margin-left: 0;
   font-size: 15px;
   list-style: none;
+}
+a {
+  text-decoration: none;
+  color: white;
+}
+
+header {
+  width: 1400px;
+  height: 100px;
+  text-align: center;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0 auto;
+}
+
+header > h1 > a {
+  color: black;
+}
+
+.pagination {
+  justify-content: center;
+}
+.container {
+  margin-top: 50px;
+}
+
+
+.blockquote-footer {
+  margin-top: 5px;
+}
+
+.info {
+  display: flex;
+  justify-content: space-between;
+}
+
+.current > a {
+  font-weight: bold;
+  background-color: #e9ecef;
+}
+
+.pagination {
+  justify-content: center;
+}
+
+.card-title {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.col {
+  cursor: pointer;
 }
